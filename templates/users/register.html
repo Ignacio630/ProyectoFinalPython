@@ -1,0 +1,17 @@
+{% extends 'layouts/home_page.html' %}
+
+
+{% block title%}
+Register
+{% endblock %}
+
+{% block content %}
+
+    {{error}}
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}        
+        <button>Login</button>    
+    </form>
+
+{% endblock %}
