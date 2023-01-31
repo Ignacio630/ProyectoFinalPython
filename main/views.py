@@ -1,7 +1,11 @@
-from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from categories.models import Category
 
 def home_page(request):
-    
-    return render(request, "layouts/home_page.html")
+    categories = Category.objects.all()
+    context = {
+        "categories": categories,
+    }
+
+    return render(request, "layouts/home_page.html", context=context)
