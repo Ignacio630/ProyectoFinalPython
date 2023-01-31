@@ -19,7 +19,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="{% url 'create_product' %}">Productos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="#">Productos</a>
@@ -56,6 +56,19 @@
                     {% endif %}
                 </ul>
             </div>
+<<<<<<< HEAD
+=======
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+                {% if user.is_authenticated %}
+                    <button class="btn btn-outline-success" href="{% url 'logout' %}" role="button">Cerrar Sesion</button>
+                {% else %}
+                    <button class="btn btn-outline-success" href="{% url 'register' %}" role="button">Registrarse</button>
+                    <button class="btn btn-outline-success" href="{% url 'login' %}" role="button">Iniciar sesion</button>
+                {% endif %}
+            </form>
+>>>>>>> f066075d74f239665bb3f466439d1764f41310dd
         </div>
     </nav>
     {% block content%}
