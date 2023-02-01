@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/7f6fe39247.js" crossorigin="anonymous"></script>
     <title>{%block title %}Home{% endblock %}</title>
 </head>
 
@@ -43,7 +42,13 @@
                 <ul class="navbar-nav p-2 row gx-5">
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <i class="fa-solid fa-user"></i>
+
+                        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="30" fill="currentColor"
+                                class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                <path fill-rule="evenodd"
+                                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                            </svg></a>
                         <a class="btn btn-danger" href="{% url 'logout' %}" role="button">Cerrar Sesion</a>
                     </li>
                     {% else %}
@@ -58,10 +63,11 @@
             </div>
         </div>
     </nav>
-    {% block content%}
+    {% block content%}  
+    {% if user.is_authenticated %}
     <main class="container py-5">
         <section class="card card-body">
-            <h1 class="display-4 text-center">Proyecto Final PYTHON + DJANGO</h1>
+            <h1 class="display-4 text-center">Bienvenido a mi Proyecto Final PYTHON + DJANGO {{user.username}}</h1>
             <p class="text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem eum odit
                 tempore
                 similique vitae id
@@ -69,6 +75,20 @@
                 asperiores eveniet?</p>
         </section>
     </main>
+    {% else %}
+    <main class="container py-5">
+        <section class="card card-body">
+            <h1 class="display-4 text-center">Bienvenido a mi Proyecto Final PYTHON + DJANGO</h1>
+            <p class="text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem eum odit
+                tempore
+                similique vitae id
+                quisquam debitis atque minus, numquam optio alias nulla, ea voluptatem laborum. Reprehenderit rerum
+                asperiores eveniet?</p>
+        </section>
+    </main>
+    {% endif %}
+
+    
     {% endblock %}
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"

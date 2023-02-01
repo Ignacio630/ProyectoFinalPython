@@ -46,7 +46,3 @@ def signout(request):
     if request.method == 'GET':
         logout(request)
         return redirect('home_page')
-
-
-def home_user(request):
-    return render(request, 'home_page.html')

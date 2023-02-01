@@ -13,7 +13,7 @@ Login
         <div class="col-md-4 offset-md-4 mt-5">
             <form method="POST" class="card card-body">
                 <h1 class="text-center mb-4">Iniciar sesion</h1>
-                {{error}}
+                <p class="text-danger">{{error}}</p>
                 {% csrf_token %}
                 <div class="mb-4">
                     <input type="text" name="username" id="username" placeholder="Username" class="form-control" required autofocus>

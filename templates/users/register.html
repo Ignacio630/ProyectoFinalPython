@@ -7,33 +7,29 @@ Register
 
 {% block content %}
 
-   
-    <main class="container ">
-        <div class="row">
-            <div class="col-md-4 offset-md-4 text-center mt-5">
-                <form method="POST" class="card card-body">
-                    <h1 class="text-center mb-5">Registrarse</h1>
-                    {% csrf_token %}
-                    {{error}}
-                    <form method="POST">
-                        {% csrf_token %}            
-                        <div class="mb-3">
-                            <input type="text" name="username" id="username" placeholder="Username" class="form-control" required autofocus>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <input type="password" name="password1" id="password1" placeholder="Password" class="form-control" required>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <input type="password" name="password2" id="password2" placeholder="Confirm Password" class="form-control" required>
-                        </div>
-                        
 
-                        
-                        <button class="btn btn-primary">Login</button>    
-                    </form>
-            </div>
+<main class="container ">
+    <div class="row">
+        <div class="col-md-4 offset-md-4 text-center mt-5">
+            <form method="POST" class="card card-body">
+                {% csrf_token %}
+                <h1 class="text-center mb-5">Registrarse</h1>
+                <p class="text-danger">{{error}}</p>
+                <div class="mb-3">
+                    <input type="text" name="username" id="username" placeholder="Username"  class="form-control"
+                        required autofocus>
+                </div>
+                <div class="mb-3">
+                    <input type="password" name="password1" id="password1" placeholder="Password" class="form-control"
+                        required>
+                </div>
+                <div class="mb-3">
+                    <input type="password" name="password2" id="password2" placeholder="Confirm Password"
+                        class="form-control" required>
+                </div>
+                <button class="btn btn-primary">Login</button>
+            </form>
         </div>
-    </main>
+    </div>
+</main>
 {% endblock %}
