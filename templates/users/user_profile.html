@@ -1,0 +1,35 @@
+{% extends 'layouts/home_page.html' %}
+
+{% block title %}
+Login
+{% endblock %}
+
+
+
+{% block content %}
+
+<main class="container ">
+    <div class="row">
+        <div class="col-md-4 offset-md-4 mt-5">
+            <div class="card card-body">
+                    <div class="mb-3">
+                        <h4>ID: {{user.id}}</h4>
+                    </div>
+                    <div class="mb-3">
+                        <h4>Usuario: {{user.username}}</h4>
+                    </div>
+                    <div class="mb-3">
+                        <h4>Email: {{user.email}}</h4>
+                    </div>
+                    <div class="mb-3">
+                        <h4>Nombre: {{user.first_name}}</h4>
+                    </div>
+                    <div class="mb-3">
+                        <h4>Apellido: {{user.last_name}}</h4>
+                    </div>
+                <a class="btn btn-primary" href="{% url 'user_profile_edit' %}">Editar perfil</a>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

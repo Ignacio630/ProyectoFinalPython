@@ -43,27 +43,27 @@
                     {% if user.is_authenticated %}
                     <li class="nav-item">
 
-                        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="30" fill="currentColor"
+                        <a href="{% url 'user_profile' %}"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="30" fill="currentColor"
                                 class="bi bi-person-circle" viewBox="0 0 16 16">
                                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                                 <path fill-rule="evenodd"
                                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                             </svg></a>
-                        <a class="btn btn-danger" href="{% url 'logout' %}" role="button">Cerrar Sesion</a>
+                        <a class="btn btn-danger" href="{% url 'logout_user' %}" role="button">Cerrar Sesion</a>
                     </li>
                     {% else %}
                     <li class="nav-item col">
-                        <a class="btn btn-success" href="{% url 'register' %}" role="button">Registrarse</a>
+                        <a class="btn btn-success" href="{% url 'register_form' %}" role="button">Registrarse</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="btn btn-success" href="{% url 'login' %}" role="button">Iniciar sesion</a>
+                        <a class="btn btn-success" href="{% url 'login_form' %}" role="button">Iniciar sesion</a>
                     </li>
                     {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
-    {% block content%}  
+    {% block content%}
     {% if user.is_authenticated %}
     <main class="container py-5">
         <section class="card card-body">
@@ -75,6 +75,17 @@
                 asperiores eveniet?</p>
         </section>
     </main>
+    <!-- {% for product in products%}
+    <a href="{% url 'product_detail' product.id %}">
+        <div class="card" style="width: 18rem;">
+            <img src="{{product.image.url}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{product.name}}</h5>
+                <p class="card-text">{{product.description}}</p>
+            </div>
+        </div>
+    </a>
+    {% endfor %}-->
     {% else %}
     <main class="container py-5">
         <section class="card card-body">
@@ -85,10 +96,11 @@
                 quisquam debitis atque minus, numquam optio alias nulla, ea voluptatem laborum. Reprehenderit rerum
                 asperiores eveniet?</p>
         </section>
+
     </main>
     {% endif %}
 
-    
+
     {% endblock %}
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
