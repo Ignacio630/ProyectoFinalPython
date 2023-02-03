@@ -1,0 +1,23 @@
+{% extends 'layouts/home_page.html'%}
+
+{% block title%}
+    Eliminar perfil
+{% endblock %}
+
+{% block content%}
+<main class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4 mt-5">
+            <form method="POST" class="card card-body">
+                <h1 class="text-center mb-4">Eliminar usuario</h1>
+                {% csrf_token %}
+                <div class="mb-4">
+                    <h4>¿Estas seguro que quieres eliminar tu perfil?</h4>
+                </div>
+                <button type="submit" class="btn btn-danger">Eliminar perfil</button>
+                <a class="btn btn-primary mb-3" href="{% url 'profile' %}">Volver</a>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}

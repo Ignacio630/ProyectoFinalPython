@@ -42,7 +42,6 @@
                 <ul class="navbar-nav p-2 row gx-5">
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-
                         <a href="{% url 'user_profile' %}"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="30" fill="currentColor"
                                 class="bi bi-person-circle" viewBox="0 0 16 16">
                                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
@@ -67,7 +66,7 @@
     {% if user.is_authenticated %}
     <main class="container py-5">
         <section class="card card-body">
-            <h1 class="display-4 text-center">Bienvenido a mi Proyecto Final PYTHON + DJANGO {{user.username}}</h1>
+            <h1 class="display-4 text-center">Bienvenido a mi Proyecto Final PYTHON + DJANGO {% if user.is_superuser %}{{user.username}} Admin{% else %}{{user.username}}{% endif %}</h1>
             <p class="text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem eum odit
                 tempore
                 similique vitae id

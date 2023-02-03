@@ -27,7 +27,8 @@ Login
                     <div class="mb-3">
                         <h4>Apellido: {{user.last_name}}</h4>
                     </div>
-                <a class="btn btn-primary" href="{% url 'user_profile_edit' %}">Editar perfil</a>
+                <a class="btn btn-primary mb-3" href="{% url 'update_user' %}">Editar perfil</a>
+                <a class="btn btn-danger" href="{% url 'delete_user' %}">Eliminar perfil</a>
             </div>
         </div>
     </div>
