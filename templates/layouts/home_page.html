@@ -74,17 +74,19 @@
                 asperiores eveniet?</p>
         </section>
     </main>
-    <!-- {% for product in products%}
-    <a href="{% url 'product_detail' product.id %}">
-        <div class="card" style="width: 18rem;">
-            <img src="{{product.image.url}}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{product.name}}</h5>
-                <p class="card-text">{{product.description}}</p>
-            </div>
-        </div>
+    {% for product in products%}
+    <a href="{% url 'detail_product' %}">
+        <main class="container">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{product.image}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text">{{product.description}}</p>
+                    </div>
+                </div>
+        </main>
     </a>
-    {% endfor %}-->
+    {% endfor %}
     {% else %}
     <main class="container py-5">
         <section class="card card-body">
@@ -95,7 +97,6 @@
                 quisquam debitis atque minus, numquam optio alias nulla, ea voluptatem laborum. Reprehenderit rerum
                 asperiores eveniet?</p>
         </section>
-
     </main>
     {% endif %}
 

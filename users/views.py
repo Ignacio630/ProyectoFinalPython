@@ -16,7 +16,6 @@ def login_form(request):
     else:
         user = authenticate(
             request, username=request.POST['username'], password=request.POST['password'])
-
         if user is None:
             context = {
                 'form': AuthenticationForm,

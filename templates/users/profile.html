@@ -14,9 +14,6 @@ Login
             <div class="card card-body">
                 <h3 class="text-center mb-4">Perfil de usuario</h3>
                     <div class="mb-3">
-                        <h4>ID: {{user.id}}</h4>
-                    </div>
-                    <div class="mb-3">
                         <h4>Usuario: {{user.username}}</h4>
                     </div>
                     <div class="mb-3">
@@ -28,14 +25,14 @@ Login
                     <div class="mb-3">
                         <h4>Apellido: {{user.last_name}}</h4>
                     </div>
-                
                 {% if user.is_staff %}
                     <a class="btn btn-primary mb-3" href="{% url 'update_user' %}">Editar perfil</a>
                     <a class="btn btn-primary " href="{% url 'admin:index' %}">Panel de administración</a>
                     <a class="btn btn-danger mt-3" href="{% url 'delete_user_btn' %}">Eliminar perfil</a>
                 {% else %}
                     <a class="btn btn-primary mb-3" href="{% url 'update_user' %}">Editar perfil</a>
-                    <a class="btn btn-danger" href="{% url 'delete_user_btn' %}">Eliminar perfil</a>    
+                    <a class="btn btn-danger mb-3" href="{% url 'delete_user_btn' %}">Eliminar perfil</a>    
+                    <a class="btn btn-success" href="{% url 'home_page' %}">Volver</a>
                 {% endif %}
             </div>
         </div>

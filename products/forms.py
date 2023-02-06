@@ -1,6 +1,6 @@
 from django import forms 
 
-class Products(forms.form):
+class Products(forms.Form):
     name = forms.CharField(max_length=100)
     descripcion = forms.CharField(max_length=300)
     price = forms.DecimalField(max_digits=6, decimal_places=2)
