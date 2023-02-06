@@ -38,7 +38,10 @@ def logout_user(request):
 
 def register_form(request):
     if request.method == 'GET':
-        return render(request, 'users/register.html', {'form': UserCreationForm})
+        context = {
+            'form': UserCreationForm,
+        }
+        return render(request, 'users/register.html', context=context)
     else:
         if request.POST['password1'] == request.POST['password2']:
             try:
@@ -47,8 +50,17 @@ def register_form(request):
                 login(request, user)
                 return redirect('home_page')
             except IntegrityError:
-                return render(request, 'users/register.html', {'form': UserCreationForm, 'error': 'Username has already been taken. Please choose a new username.'})
-        return render(request, 'users/register.html', {'form': UserCreationForm, 'error': 'Passwords did not match.'})
+                context = {
+                    'form': UserCreationForm,
+                    'error': 'Username has already been taken. Please choose a new username.'
+                }
+                return render(request, 'users/register.html', context=context)
+
+    context = {
+        'form': UserCreationForm,
+        'error': 'Las contraseñas no coinciden'
+    }
+    return render(request, 'users/register.html', context=context)
 
 # Read user
 
@@ -63,6 +75,7 @@ def user_profile(request):
         return render(request, 'users/profile.html', context=context)
 
 # Update user
+
 
 @login_required
 def update_user(request):
@@ -106,9 +119,9 @@ def delete_user_btn(request):
     if request.method == 'GET':
         return render(request, 'users/delete.html')
 
+
 @login_required
 def delete_user(request):
     user = User.objects.get(id=request.user.id)
     user.delete()
     return redirect('home_page')
-
