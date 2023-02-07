@@ -5,11 +5,12 @@ from products.models import Products
 def home_page(request):
 
     categories = Category.objects.all()
-    products = Products.objects.all()
+    listProducts = Products.objects.all()
+    
     context = {
         'categories': categories,
-        'products': products,
+        'products': listProducts,
+        'url': listProducts[0].image.url,
     }
     return render(request, "layouts/home_page.html", context=context)
-
-
+    
