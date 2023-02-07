@@ -5,12 +5,14 @@
 {% block content %}
 
 <main class="container py-5">
-    <section class="card card-body">
-        <img src="{{product.image.url}}" alt="imagen" width="30" height="30">
-        <h1 class="display-4 text-center">{{product.name}}</h1>
-        <p class="text-center">{{product.description}}</p>
-        <p class="text-center">{{product.price}}</p>
-        <a class="btn btn-primary" >Añadir al carrito</a>
+    <section class="card" style="width: 100%;"> 
+        <div class="card-body text-center">
+            <img src="{{product.image.url}}" alt="imagen" width="200" height="200">
+            <h1 class="display-4 text-center">{{product.name}}</h1>
+            <p class="text-center">{{product.description}}</p>
+            <p class="text-center">{{product.price}}</p>
+            <a class="btn btn-primary" >Añadir al carrito</a>
+        </div>
     </section>
 </main>
 

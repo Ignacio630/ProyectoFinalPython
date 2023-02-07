@@ -8,5 +8,6 @@ class ProductsForm(forms.Form):
     stock = forms.BooleanField()
     image = forms.ImageField()
     category = forms.ModelChoiceField(queryset=Category.objects.all())
+    
     def __str__(self) -> str:
         return f"Nombre: {self.name} - Precio: {self.price} - Stock: {self.stock}"
