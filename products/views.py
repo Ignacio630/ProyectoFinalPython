@@ -1,40 +1,44 @@
 from django.shortcuts import render, redirect
-from django.db import IntegrityError
-from .models import Products
+from .models import Products  
 from .forms import ProductsForm
 from categories.models import Category
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
-
+@login_required
 def create_product(request):
-
     if request.method == 'GET':
-        categories = Category.objects.all()
+        
+        form = ProductsForm()
         context = {
-            'form': ProductsForm,
-            'categories': categories,
+            'form': form,
         }
         return render(request, 'products/create_product.html', context=context)
+        
     else:
-        if request.POST['name'] or request.POST['descripcion'] or request.POST['price'] or request.POST['stock'] or request.POST['image'] or request.POST['category']:
-            try:
-                product = Products.objects.create(name=request.POST['name'], descripcion=request.POST['descripcion'], price=request.POST['price'], stock=request.POST['stock'], image=request.POST['image'], category=request.POST['category'])
-                print(product)
-                product.save()
-                return redirect('home_page')
-            except IntegrityError:
-                context = {
-                    'form': ProductsForm,
-                    'categories': categories,
-                    'error': 'Product has already been taken. Please choose a new product.'
-                }
-                return render(request, 'products/create_product.html', context=context)
+        form = ProductsForm(request.POST, request.FILES)
+        if form.is_valid():
+            product = Products.objects.create(
+            product.save()   
+            return redirect('home_page')
         else:
             context = {
-                'form': ProductsForm,
-                'categories': categories,
-                'error': 'All fields are required.'
+                'form': form,
             }
             return render(request, 'products/create_product.html', context=context)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def detail_product(request, product_id):
     product = Products.objects.get(pk=product_id)
