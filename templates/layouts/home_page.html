@@ -34,7 +34,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 {% for category in categories %}
-                                <li><a class="dropdown-item" href="#">{{category.name}}</a></li>
+                                <li><a class="dropdown-item" href="{{form}}">{{category.name}}</a></li>
                                 {% endfor %}
                             </ul>
                         </li>
@@ -100,7 +100,7 @@
                             <li class="list-group-item">
                                 <a href="{% url 'detail_product' product.id%}">
                                     <div class="card">
-                                        <img src="{{url}}" class="card-img-top" width="200px" height="320px">
+                                        <img src="{{product.image.url}}" class="card-img-top" width="200px" height="320px">
                                         <h5 class="card-title">{{product.name}}</h5>
                                         <p class="card-text">{{product.description}}</p>
                                         <a href="#" class="btn btn-primary">Añadir al carrito</a>
@@ -131,7 +131,7 @@
                         <li class="list-group-item">
                             <a href="{% url 'login_form' %}">
                                 <div class="card">
-                                    <img src="{{url}}" class="card-img-top" width="200px" height="320px">
+                                    <img src="{{product.image.url}}" class="card-img-top" width="200px" height="320px">
                                     <h5 class="card-title">{{product.name}}</h5>
                                     <p class="card-text">{{product.description}}</p>
                                     <a href="#" class="btn btn-primary">Añadir al carrito</a>

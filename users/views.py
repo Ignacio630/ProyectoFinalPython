@@ -34,8 +34,6 @@ def logout_user(request):
 
 # CRUD
 # Create user
-
-
 def register_form(request):
     if request.method == 'GET':
         context = {
@@ -63,8 +61,6 @@ def register_form(request):
     return render(request, 'users/register.html', context=context)
 
 # Read user
-
-
 @login_required
 def user_profile(request):
     user = User.objects.get(id=request.user.id)
@@ -75,8 +71,6 @@ def user_profile(request):
         return render(request, 'users/profile.html', context=context)
 
 # Update user
-
-
 @login_required
 def update_user(request):
     user = request.user
@@ -113,8 +107,6 @@ def update_user(request):
         return render(request, 'users/update.html', context=context)
 
 # Delete user
-
-
 def delete_user_btn(request):
     if request.method == 'GET':
         return render(request, 'users/delete.html')

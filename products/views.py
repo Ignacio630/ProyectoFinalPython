@@ -5,27 +5,42 @@ from categories.models import Category
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-@login_required
+
+
 def create_product(request):
-    if request.method == 'GET':
-        
-        form = ProductsForm()
-        context = {
-            'form': form,
-        }
-        return render(request, 'products/create_product.html', context=context)
-        
-    else:
-        form = ProductsForm(request.POST, request.FILES)
-        if form.is_valid():
-            product = Products.objects.create(
-            product.save()   
+    if request.method == 'POST':
+        formProduct = ProductsForm(request.POST, request.FILES)
+        print(formProduct)
+        if formProduct.is_valid():
+            info = formProduct.cleaned_data
+            name = info['name']
+            descripcion = info['descripcion']
+            price = info['price']
+            stock = info['stock']
+            image = info['image']
+            category = info['category']
+            product = Products(name=name, descripcion=descripcion, price=price, stock=stock, image=image, category=category)
+            product.save()
             return redirect('home_page')
         else:
+            categories = Category.objects.all()
             context = {
-                'form': form,
+                'form': formProduct,
+                'categories': categories,
+                'error': 'Error al crear el producto',
             }
             return render(request, 'products/create_product.html', context=context)
+    else:
+        categories = Category.objects.all()
+        context = {
+            'form': ProductsForm,
+            'categories': categories,
+        }
+        return render(request, 'products/create_product.html', context=context)
+
+
+
+
 
 
 
