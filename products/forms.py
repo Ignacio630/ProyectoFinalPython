@@ -7,7 +7,7 @@ class ProductsForm(forms.ModelForm):
     name = forms.CharField(max_length=100, required=True)
     descripcion = forms.CharField(max_length=300, required=True)
     price = forms.DecimalField(max_digits=10, decimal_places=2, required=True)
-    stock = forms.BooleanField()
+    stock = forms.BooleanField(required=False)
     image = forms.ImageField()
     category = forms.ModelChoiceField(queryset=Category.objects.all())
     
@@ -21,7 +21,7 @@ class UpdateProductsForm(forms.ModelForm):
     name = forms.CharField(max_length=100, required=True)
     descripcion = forms.CharField(max_length=300, required=True)
     price = forms.DecimalField(max_digits=10, decimal_places=2, required=True)
-    stock = forms.BooleanField()
+    stock = forms.BooleanField(required=False)
     image = forms.ImageField()
     category = forms.ModelChoiceField(queryset=Category.objects.all())
     

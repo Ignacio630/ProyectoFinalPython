@@ -4,20 +4,29 @@
 
 {% block content %}
 
-<main class="container py-5">
-    <section class="card" style="width: 100%;">
-        <div class="card-body text-center">
-            <img src="{{product.image.url}}" alt="imagen" width="200" height="200">
-            <h1 class="display-4 text-center">{{product.name}}</h1>
-            <p class="text-center">{{product.descripcion}}</p>
-            <p class="text-center">{{product.price}}</p>
-            <p class="text-center">{{product.stock}}</p>
-            <p class="text-center">{{product.category}}</p>
-            <a class="btn btn-primary">Añadir al carrito</a>
-            <a class="btn btn-warning" href="{% url 'update_product' product.id %}">Editar</a>
-            <a class="btn btn-danger" href="{% url 'delete_product' product.id %}">Eliminar</a>
+
+<div class="container">
+    <div class="card m-5">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{product.image.url}}" alt="imagen" class="img-fluid">
+                </div>
+                <div class="col-md-8">
+                    <h1 class="display-4 text-center">{{product.name}}</h1>
+                    <p class="text-center">{{product.description}}</p>
+                    <p class="text-center">{{product.price}}</p>
+                    <p class="text-center">Con stock</p>
+                    <p class="text-center">{% if product.stock %}Con stock{% else %}Sin stock{% endif %}</p>
+                    <div class="d-flex justify-content-center">
+                        <a class="btn btn-primary mr-2">Añadir al carrito</a>
+                        <a class="btn btn-warning mr-2" href="{% url 'update_product' product.id %}">Editar</a>
+                        <a class="btn btn-danger" href="{% url 'delete_product' product.id %}">Eliminar</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
-</main>
+    </div>
+</div>
 
 {% endblock %}

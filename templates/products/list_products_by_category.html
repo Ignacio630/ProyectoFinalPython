@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{%block title %}{{ category.name }}{% endblock %}
+
+{% block content%}
+<h1 class="text-center">Productos en la categoria: {{ category.name }}</h1>
+<div class="container text-center d-flex">
+    {% for product in products %}
+    <div class="col-md-5 ">
+        <ul class="list-group">
+            <li class="list-group-item m-3">
+                <a href="{% url 'detail_product' product.id %}">
+                    <div class="card">
+                        <img src="{{product.image.url}}" class="card-img-top" width="200px" height="320px">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p c lass="card-text">{{product.descripcion}}</p>
+                        <a href="#" class="btn btn-primary">Añadir al carrito</a>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

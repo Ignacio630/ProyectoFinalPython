@@ -3,7 +3,6 @@
 {%block title %}Index{% endblock %}
 
 {% block content%}
-{% if user.is_authenticated %}
 <main class="container py-5">
     <section class="card card-body">
         <h1 class="display-4 text-center">Bienvenido a mi Proyecto Final PYTHON + DJANGO {{user.username}}</h1>
@@ -14,56 +13,5 @@
             asperiores eveniet?</p>
     </section>
 </main>
-{% for product in products %}
-<main class="container text-center">
-    <div class="col-md-5">
-        <div class="col mb-3">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <a href="{% url 'detail_product' product.id %}">
-                        <div class="card">
-                            <img src="{{product.image.url}}" class="card-img-top" width="200px" height="320px">
-                            <h5 class="card-title">{{product.name}}</h5>
-                            <p c lass="card-text">{{product.descripcion}}</p>
-                            <a href="#" class="btn btn-primary">Añadir al carrito</a>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</main>
-{% endfor %}
-{% else %}
-<main class="container py-5">
-    <section class="card card-body">
-        <h1 class="display-4 text-center">Bienvenido a mi Proyecto Final PYTHON + DJANGO</h1>
-        <p class="text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem eum odit
-            tempore
-            similique vitae id
-            quisquam debitis atque minus, numquam optio alias nulla, ea voluptatem laborum. Reprehenderit rerum
-            asperiores eveniet?</p>
-    </section>
-</main>
-{% for product in products %}
-<main class="container text-center">
-    <div class="col-md-5">
-        <div class="col mb-3">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <a href="{% url 'login_form' %}">
-                        <div class="card">
-                            <img src="{{product.image.url}}" class="card-img-top" width="200px" height="320px">
-                            <h5 class="card-title">{{product.name}}</h5>
-                            <p class="card-text">{{product.description}}</p>
-                            <a href="#" class="btn btn-primary">Añadir al carrito</a>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</main>
-{% endfor %}
-{% endif %}
+
 {% endblock %}

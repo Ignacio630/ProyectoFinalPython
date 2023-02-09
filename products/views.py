@@ -91,7 +91,31 @@ def delete_product(request, product_id):
         return render(request, 'products/delete_product.html', context=context)
     
     
-    
+def list_products(request):
+    if request.method == 'GET':
+        products = Products.objects.all()
+        num_products = Products.objects.count()
+        if  num_products > 0:
+            context = {
+                'products': products,
+            }
+            return render(request, 'products/list_products.html', context=context)
+        else:
+            context = {
+                'products': products,
+                'error': 'No hay productos',
+            }
+            return render(request, 'products/list_products.html', context=context)
+    else:
+        context = {
+            'error': 'Error al listar los productos',
+        }
+        return render(request, 'products/list_products.html', context=context)
+
+
+
+
+
 def list_products_by_category(request, category_id):
     category = Category.objects.get(id=category_id)
     products = Products.objects.filter(category=category)
@@ -99,4 +123,4 @@ def list_products_by_category(request, category_id):
         'category': category,
         'products': products,
     }
-    return render(request, 'products/list_products.html', context=context)
+    return render(request, 'products/list_products_by_category.html', context=context)

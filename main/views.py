@@ -3,10 +3,8 @@ from categories.models import Category
 from products.models import Products
 
 def home_page(request):
-
     categories = Category.objects.all()
     listProducts = Products.objects.all()
-    print(listProducts)
     context = {
         'categories': categories,
         'products': listProducts,
@@ -14,10 +12,8 @@ def home_page(request):
     return render(request, "layouts/home_page.html", context=context)
 
 def base(request):
-
     categories = Category.objects.all()
     listProducts = Products.objects.all()
-    print(listProducts)
     context = {
         'categories': categories,
         'products': listProducts,
