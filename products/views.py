@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect 
 from .models import Products  
-from .forms import ProductsForm
+from .forms import ProductsForm, UpdateProductsForm
 from categories.models import Category
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -10,23 +11,13 @@ from django.contrib.auth.decorators import login_required
 def create_product(request):
     if request.method == 'POST':
         formProduct = ProductsForm(request.POST, request.FILES)
-        print(formProduct)
         if formProduct.is_valid():
-            info = formProduct.cleaned_data
-            name = info['name']
-            descripcion = info['descripcion']
-            price = info['price']
-            stock = info['stock']
-            image = info['image']
-            category = info['category']
-            product = Products(name=name, descripcion=descripcion, price=price, stock=stock, image=image, category=category)
+            product = formProduct.save(commit=False)
             product.save()
             return redirect('home_page')
         else:
-            categories = Category.objects.all()
             context = {
                 'form': formProduct,
-                'categories': categories,
                 'error': 'Error al crear el producto',
             }
             return render(request, 'products/create_product.html', context=context)
@@ -38,25 +29,8 @@ def create_product(request):
         }
         return render(request, 'products/create_product.html', context=context)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def detail_product(request, product_id):
-    product = Products.objects.get(pk=product_id)
+    product = get_object_or_404(Products, pk=product_id)
         
     if request.method == 'GET':
         context = {
@@ -66,8 +40,63 @@ def detail_product(request, product_id):
 
 
 def delete_product(request, product_id):
-    
-    if request.method == 'GET':
-        product = Products.objects.get(pk=product_id)
+    product = get_object_or_404(Products, pk=product_id)    
+    if request.method == 'POST':
         product.delete()
         return redirect('home_page')
+    else:
+        context = {
+            'product': product,
+        }
+        return render(request, 'products/delete_product.html', context=context)
+    
+def update_product(request, product_id):
+    product = get_object_or_404(Products, pk=product_id)    
+    
+    if request.method == 'GET':
+        form = UpdateProductsForm(instance=product)
+        context = {
+            'form': form,
+            'product': product,
+            'categories': Category.objects.all(),
+        }
+        return render(request, 'products/update_product.html', context=context)
+    elif request.method == 'POST':
+        form = UpdateProductsForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('detail_product', product_id=product.id)
+        else:
+            print(request.POST)
+            print(form.errors)
+            context = {
+                'form': form,
+                'product': product,
+                'categories': Category.objects.all(),
+                'error': 'Error al actualizar el producto',
+                'form_errors': form.errors,
+            }
+            return render(request, 'products/update_product.html', context=context)
+        
+        
+def delete_product(request, product_id):
+    product = get_object_or_404(Products, pk=product_id)    
+    if request.method == 'POST':
+        product.delete()
+        return redirect('home_page')
+    else:
+        context = {
+            'product': product,
+        }
+        return render(request, 'products/delete_product.html', context=context)
+    
+    
+    
+def list_products_by_category(request, category_id):
+    category = Category.objects.get(id=category_id)
+    products = Products.objects.filter(category=category)
+    context = {
+        'category': category,
+        'products': products,
+    }
+    return render(request, 'products/list_products.html', context=context)

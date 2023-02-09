@@ -4,6 +4,7 @@ from .models import Products
 
 
 
+
 admin.site.register(Products)
 
 class ProductsAdmin(admin.ModelAdmin):
