@@ -87,8 +87,7 @@ def delete_product(request, product_id):
             'product': product,
         }
         return render(request, 'products/delete_product.html', context=context)
-    
-    
+
 def list_products(request):
     if request.method == 'GET':
         products = Products.objects.all()
@@ -112,10 +111,6 @@ def list_products(request):
             'error': 'Error al listar los productos',
         }
         return render(request, 'products/list_products.html', context=context)
-
-
-
-
 
 def list_products_by_category(request, category_id):
     categories = Category.objects.all()

@@ -3,9 +3,9 @@
 {% block title %}Lista productos{% endblock %}
 
 {% block content %}
-<div class="container text-center">
+<div class="container ">
 {% if error %}
-<div class="body">
+<div class="body ">
     <div class="card m-5">
         <div class="card-body">
             <div class="alert text-danger text-center">
@@ -17,21 +17,23 @@
 </div>
 
 {% endif %}
-<div class="body text-end">
-    <div class="btn btn-secondary dropdown mt-5 ">
-    <a class="dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
-        aria-expanded="false">
-        Categorias
-    </a>
-    <ul class="dropdown-menu">
-        {% for category in categories %}
-        <li><a class="dropdown-item"
+<div class="body justify-content-end mx-5">
+    <div class="btn btn-light dropdown mt-3 ">
+        <a class="dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Categorias
+        </a>
+        <ul class="dropdown-menu">
+            {% for category in categories %}
+            <li><a class="dropdown-item"
                 href="{% url 'list_products_by_category' category.id %}">{{category.name}}</a>
-        </li>
-        {% endfor %}
-    </ul>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
-</div>
+<hr class="border border-dark border-2 opacity-50">
+
 {% for product in products %}
 {% if product.stock%}
 
