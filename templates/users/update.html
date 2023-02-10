@@ -28,17 +28,9 @@ Editar perfil
                     <input type="text" name="last_name" id="last_name" placeholder="Apellido" class="form-control"
                         required>
                 </div>
-
-                <div class="mb-4">
-                    <input type="password" name="password1" id="password1" placeholder="Contraseña" class="form-control"
-                        required>
-                </div>
-
-                <div class="mb-4">
-                    <input type="password" name="password2" id="password2" placeholder="Confirmar contraseña"
-                        class="form-control" required>
-                </div>
-                <button class="btn btn-primary">Editar</button>
+                <a href="{% url 'update_password' %}">Desea cambiar la contraseña?</a>
+                <button class="btn btn-warning my-3">Editar</button>
+                <a class="btn btn-primary" href="{% url 'user_profile' %}">Volver</a>
             </form>
         </div>
     </div>

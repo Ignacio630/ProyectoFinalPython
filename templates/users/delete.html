@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title%}
-    Eliminar perfil
+Eliminar perfil
 {% endblock %}
 
 {% block content%}
@@ -14,7 +14,7 @@
                 <div class="mb-4">
                     <h4>¿Estas seguro que quieres eliminar tu perfil?</h4>
                 </div>
-                <a class="btn btn-danger mb-3" href="{% url 'delete_user' %}">Eliminar perfil</a>
+                <input type="submit" class="btn btn-danger mb-3" href="{% url 'delete_user' %}">Eliminar perfil</a>
                 <a class="btn btn-primary" href="{% url 'user_profile' %}">Volver</a>
             </form>
         </div>

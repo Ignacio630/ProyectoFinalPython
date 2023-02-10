@@ -14,21 +14,20 @@ Product Form
                 <h1 class="text-center mb-5">Product Form</h1>
                 <p class="text-danger">{{error}}</p>
                 <div class="mb-3">
-                    <input type="text" name="name" id="name" placeholder="Product Name" class="form-control" required
-                        autofocus>
+                    <input type="text" name="name" id="name" placeholder="Product Name" class="form-control" autofocus>
                 </div>
                 <div class="mb-3">
-                    <textarea name="descripcion" id="descripcion" placeholder="Product Description" class="form-control"
-                        required></textarea>
+                    <textarea name="descripcion" id="descripcion" placeholder="Product Description"
+                        class="form-control"></textarea>
                 </div>
                 <div class="mb-3">
-                    <input type="number" name="price" id="price" placeholder="Price" class="form-control" required>
+                    <input type="number" name="price" id="price" placeholder="Price" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <input type="file" name="image" id="image" class="form-control" required>
+                    <input type="file" name="image" id="image" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <select name="category" id="category" class="form-control" required>
+                    <select name="category" id="category" class="form-control">
                         {% for category in categories %}
                         <option value="{{category.id}}">{{category.name}}</option>
                         {% endfor %}

@@ -3,24 +3,61 @@
 {%block title %}{{ category.name }}{% endblock %}
 
 {% block content%}
-<h1 class="text-center">Productos en la categoria: {{ category.name }}</h1>
-<div class="container text-center d-flex">
+<div class="container my-3">
+    <div class="card card-row">
+        <h1 class="text-center ">Productos en la categoria: {{ category.name }}</h1>
+    </div>
+</div>
+
+{% if user.is_superuser %}
+<div class="container">
     {% for product in products %}
-    <div class="col-md-5 ">
-        <ul class="list-group">
-            <li class="list-group-item m-3">
-                <a href="{% url 'detail_product' product.id %}">
-                    <div class="card">
-                        <img src="{{product.image.url}}" class="card-img-top" width="200px" height="320px">
-                        <h5 class="card-title">{{product.name}}</h5>
-                        <p c lass="card-text">{{product.descripcion}}</p>
-                        <a href="#" class="btn btn-primary">Añadir al carrito</a>
+    <div class="card mb-5">
+        <div class="card-body ">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{product.image.url}}" alt="imagen" class="img-fluid">
+                </div>
+                <div class="col-md-8">
+                    <h1 class="display-4 text-center">{{product.name}}</h1>
+                    <p class="text-center">{{product.description}}</p>
+                    <p class="text-center">{{product.price}}</p>
+                    <p class="text-center">Con stock</p>
+                    <p class="text-center">{{product.category}}</p>
+                    <div class="d-flex justify-content-center">
+                        <a class="btn btn-primary mr-2" href="{% url 'login_form' %}">Añadir al carrito</a>
+                        <a class="btn btn-warning mr-2" href="{% url 'update_product' product.id %}">Editar</a>
+                        <a class="btn btn-danger" href="{% url 'delete_product' product.id %}">Eliminar</a>
                     </div>
-                </a>
-            </li>
-        </ul>
+                </div>
+            </div>
+        </div>
     </div>
     {% endfor %}
 </div>
-
+{% else %}
+<div class="container">
+    {% for product in products %}
+    <div class="card mb-5">
+        <div class="card-body ">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{product.image.url}}" alt="imagen" class="img-fluid">
+                </div>
+                <div class="col-md-8">
+                    <h1 class="display-4 text-center">{{product.name}}</h1>
+                    <p class="text-center">{{product.description}}</p>
+                    <p class="text-center">{{product.price}}</p>
+                    <p class="text-center">Con stock</p>
+                    <p class="text-center">{{product.category}}</p>
+                    <div class="d-flex justify-content-center">
+                        <a class="btn btn-primary mr-2" href="{% url 'login_form' %}">Añadir al carrito</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
 {% endblock %}

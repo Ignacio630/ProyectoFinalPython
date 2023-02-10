@@ -38,7 +38,7 @@ def detail_product(request, product_id):
         }
         return render(request, 'products/detail_product.html', context=context)
 
-
+@login_required
 def delete_product(request, product_id):
     product = get_object_or_404(Products, pk=product_id)    
     if request.method == 'POST':
@@ -50,6 +50,7 @@ def delete_product(request, product_id):
         }
         return render(request, 'products/delete_product.html', context=context)
     
+@login_required
 def update_product(request, product_id):
     product = get_object_or_404(Products, pk=product_id)    
     
@@ -67,8 +68,6 @@ def update_product(request, product_id):
             form.save()
             return redirect('detail_product', product_id=product.id)
         else:
-            print(request.POST)
-            print(form.errors)
             context = {
                 'form': form,
                 'product': product,
@@ -94,10 +93,12 @@ def delete_product(request, product_id):
 def list_products(request):
     if request.method == 'GET':
         products = Products.objects.all()
+        categories = Category.objects.all()
         num_products = Products.objects.count()
         if  num_products > 0:
             context = {
                 'products': products,
+                'categories': categories,
             }
             return render(request, 'products/list_products.html', context=context)
         else:
@@ -117,9 +118,11 @@ def list_products(request):
 
 
 def list_products_by_category(request, category_id):
+    categories = Category.objects.all()
     category = Category.objects.get(id=category_id)
     products = Products.objects.filter(category=category)
     context = {
+        'categories': categories,
         'category': category,
         'products': products,
     }

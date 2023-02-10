@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect , get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from .forms import UserEditForm
+from .forms import UserEditForm, UserEditPasswordForm
 
 
 def login_form(request):
@@ -43,7 +43,7 @@ def register_form(request):
     else:
         if request.POST['password1'] == request.POST['password2']:
             try:
-                user = User.objects.create_user(request.POST['username'], password=request.POST['password1'],email=request.POST['email'], first_name=request.POST['first_name'], last_name=request.POST['last_name'])
+                user = User.objects.create_user(request.POST['username'], password=request.POST['password1'],email=request.POST['email'])
                 user.save()
                 login(request, user)
                 return redirect('home_page')
@@ -83,7 +83,6 @@ def update_user(request):
                 user.email = info['email']
                 user.first_name = info['first_name']
                 user.last_name = info['last_name']
-                user.set_password(info['password1'])
                 user.save()
                 return redirect('user_profile')
             else:
@@ -106,14 +105,46 @@ def update_user(request):
         }
         return render(request, 'users/update.html', context=context)
 
-# Delete user
-def delete_user_btn(request):
-    if request.method == 'GET':
-        return render(request, 'users/delete.html')
+def update_password(request):
+    user = request.user
+    if request.method == 'POST':
+        form = UserEditPasswordForm(request.POST)
+        if form.is_valid():
+            if form.cleaned_data['password1'] == form.cleaned_data['password2']:
+                user.set_password(form.cleaned_data['password1'])
+                user.save()
+                
+                context = {
+                    'user': user,
+                    'form': form,
+                    'success': 'Contraseña actualizada correctamente'
+                }
+                return render(request, 'users/update_password.html', context=context)
+            else:
+                context = {
+                    'user': user,
+                    'form': form,
+                    'error': 'Las contraseñas no coinciden'
+                }
+                return render(request, 'users/update_password.html', context=context)
+    else:
+        form = UserEditPasswordForm()
+        context = {
+            'user': user,
+            'form': form
+        }
+        return render(request, 'users/update_password.html', context)
 
+# Delete user
 
 @login_required
 def delete_user(request):
-    user = User.objects.get(id=request.user.id)
-    user.delete()
-    return redirect('home_page')
+    user = get_object_or_404(User, pk=request.user.id)    
+    if request.method == 'POST':
+        user.delete()
+        return redirect('home_page')
+    else:
+        context = {
+            'user': user,
+        }
+        return render(request, 'products/delete_product.html', context=context)
