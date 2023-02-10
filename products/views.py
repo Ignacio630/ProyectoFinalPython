@@ -77,7 +77,6 @@ def update_product(request, product_id):
             }
             return render(request, 'products/update_product.html', context=context)
         
-        
 def delete_product(request, product_id):
     product = get_object_or_404(Products, pk=product_id)    
     if request.method == 'POST':
@@ -95,6 +94,7 @@ def list_products(request):
         products = Products.objects.all()
         categories = Category.objects.all()
         num_products = Products.objects.count()
+        
         if  num_products > 0:
             context = {
                 'products': products,

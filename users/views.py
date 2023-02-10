@@ -105,6 +105,7 @@ def update_user(request):
         }
         return render(request, 'users/update.html', context=context)
 
+@login_required
 def update_password(request):
     user = request.user
     if request.method == 'POST':
@@ -114,12 +115,7 @@ def update_password(request):
                 user.set_password(form.cleaned_data['password1'])
                 user.save()
                 
-                context = {
-                    'user': user,
-                    'form': form,
-                    'success': 'Contraseña actualizada correctamente'
-                }
-                return render(request, 'users/update_password.html', context=context)
+                return redirect('home_page')
             else:
                 context = {
                     'user': user,
@@ -147,4 +143,4 @@ def delete_user(request):
         context = {
             'user': user,
         }
-        return render(request, 'products/delete_product.html', context=context)
+        return render(request, 'users/delete.html', context=context)

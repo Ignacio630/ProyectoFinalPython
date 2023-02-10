@@ -3,10 +3,8 @@
 {% block title %}Lista productos{% endblock %}
 
 {% block content %}
-
-{% for product in products %}
+<div class="container text-center">
 {% if error %}
-
 <div class="body">
     <div class="card m-5">
         <div class="card-body">
@@ -17,43 +15,38 @@
         </div>
     </div>
 </div>
-{% else %}
-{% if product.stock%}
-<div class="container">
-    <div class="card m-5">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-4">
-                    <img src="{{product.image.url}}" alt="imagen" class="img-fluid">
-                </div>
-                <div class="col-md-8">
-                    <h1 class="display-4 text-center">{{product.name}}</h1>
-                    <p class="text-center">{{product.description}}</p>
-                    <p class="text-center">{{product.price}}</p>
-                    <p class="text-center">Con stock</p>
-                    <p class="text-center">{{product.category}}</p>
-                    <div class="d-flex justify-content-center">
-                        <a class="btn btn-primary mr-2" href="{% url 'login_form' %}">Añadir al carrito</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+{% endif %}
+<div class="body text-end">
+    <div class="btn btn-secondary dropdown mt-5 ">
+    <a class="dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Categorias
+    </a>
+    <ul class="dropdown-menu">
+        {% for category in categories %}
+        <li><a class="dropdown-item"
+                href="{% url 'list_products_by_category' category.id %}">{{category.name}}</a>
+        </li>
+        {% endfor %}
+    </ul>
 </div>
-{% else %}
+</div>
+{% for product in products %}
+{% if product.stock%}
+
 {% if user.is_superuser %}
-<div class="container">
-    <div class="card bg-secondary m-5">
+    <div class="card  m-5">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4">
-                    <img src="{{product.image.url}}" alt="imagen" class="img-fluid">
+                    <img src="{{product.image.url}}" alt="imagen"  width="300px" height="300px" class="rounded-circle ml-5">
                 </div>
                 <div class="col-md-8">
                     <h1 class="display-4 text-center">{{product.name}}</h1>
                     <p class="text-center">{{product.description}}</p>
                     <p class="text-center">{{product.price}}</p>
-                    <p class="text-center">Sin stock</p>
+                    <p class="text-center">{% if product.stock %}Con stock{% else %}Sin stock{% endif %}</p>
                     <p class="text-center">{{product.category}}</p>
                     <div class="d-flex justify-content-center">
                         <a class="btn btn-warning mr-2" href="{% url 'update_product' product.id %}">Editar</a>
@@ -63,10 +56,29 @@
             </div>
         </div>
     </div>
-</div>
-{% endif %}
+    {% else %}
+    <div class="card m-5">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="{{product.image.url}}" alt="imagen" width="300px" height="300px" class="rounded-circle ml-5">
+                    </div>
+                    <div class="col-md-7">
+                    <h1 class="display-4 text-center">{{product.name}}</h1>
+                    <p class="text-center">{{product.description}}</p>
+                    <p class="text-center">{{product.price}}</p>
+                    <p class="text-center">{% if product.stock %}Con stock{% else %}Sin stock{% endif %}</p>
+                    <p class="text-center">{{product.category}}</p>
+                    <div class="d-flex justify-content-center">
+                        <a class="btn btn-primary mr-2" href="{% url 'login_form' %}">Añadir al carrito</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endif %}
 {% endif %}
 {% endfor %}
 
+</div>
 {% endblock %}

@@ -6,7 +6,7 @@
 
 + **Ignacio** **Medici**
 
-## Descripción del Proyecto: ECOMMERCE-ROPA    
+## Descripción del Proyecto: Tienda de ropa 
 El proyecto se basa en un e-commerce con las operaciones basicas CRUD de los productos, categorias y usuarios. 
 El proyecto pude: 
 
