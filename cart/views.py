@@ -4,6 +4,7 @@ from products.models import Products
 from .models import Cart
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from products.models import Products
 # Create your views here.
 
 def cart_product(request):
@@ -22,17 +23,14 @@ def cart_product(request):
 @login_required(login_url='login_form')
 def add_product(request, product_id):
     product = Products.objects.get(id=product_id)
-    if request.method == 'POST':
-        try:
-            cart = Cart.objects.get(product=product, user=request.user)
-            cart.quantity += 1
-            cart.total_price = cart.quantity * product.price
-            cart.save()
-        except:
-            cart = Cart.objects.create(
-                product=product, user=request.user, quantity=1, total_price=product.price)
-            cart.save()
-        return redirect('cart_products')
+    try:
+        cart = Cart.objects.get(user=request.user, product=product)
+        cart.quantity += 1
+        cart.total_price = cart.quantity * product.price
+    except Cart.DoesNotExist:
+        cart = Cart.objects.create(user=request.user, product=product, quantity=1, total_price=product.price)
+    cart.save()
+    return redirect('cart_products')
 
 def delete_product(request, product_id):
     if request.method == 'POST':
