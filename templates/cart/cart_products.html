@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{%block title %}Carrito{% endblock %}
+
+{% block content%}
+<div class="container bg-light my-3">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+            <tr>
+                <th scope="row">{{item.id}}</th>
+                <td>{{item.product.name}}</td>
+                <td>{{item.product.price}} </td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.total_price}}</td>
+                <td>
+                    <form action="{% url 'delete_product' item.product.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="X" class="text-danger">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="4" class="text-left">Total</th>
+                <td>{{total}}</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+{% endblock %}

@@ -9,8 +9,7 @@
     </div>
     <div class="body d-flex justify-content-end">
         <div class="btn btn-light dropdown mt-5 justify-content-end">
-            <a class="dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
+            <a class="dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Categorias
             </a>
             <ul class="dropdown-menu">
@@ -40,7 +39,7 @@
                     <p class="text-center">{% if product.stock %}Con stock{% else %}Sin stock{% endif %}</p>
                     <p class="text-center">{{product.category}}</p>
                     <div class="d-flex justify-content-center">
-                        <a class="btn btn-primary mr-2" href="{% url 'login_form' %}">Añadir al carrito</a>
+                        <a class="btn btn-primary mr-2" href="{% url 'add_product' product.id %}">Añadir al carrito</a>
                         <a class="btn btn-warning mr-2" href="{% url 'update_product' product.id %}">Editar</a>
                         <a class="btn btn-danger" href="{% url 'delete_product' product.id %}">Eliminar</a>
                     </div>
@@ -53,6 +52,7 @@
 {% else %}
 <div class="container">
     {% for product in products %}
+    {% if product.stock %}
     <div class="card mb-5">
         <div class="card-body ">
             <div class="row">
@@ -63,15 +63,16 @@
                     <h1 class="display-4 text-center">{{product.name}}</h1>
                     <p class="text-center">{{product.description}}</p>
                     <p class="text-center">{{product.price}}</p>
-                    <p class="text-center">Con stock</p>
+                    <p class="text-center">{% if product.stock %}Con stock{% else %}Sin stock{% endif %}</p>
                     <p class="text-center">{{product.category}}</p>
                     <div class="d-flex justify-content-center">
-                        <a class="btn btn-primary mr-2" href="{% url 'login_form' %}">Añadir al carrito</a>
+                        <a class="btn btn-primary mr-2" href="{% url 'add_product' product.id %}">Añadir al carrito</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    {% endif %}
     {% endfor %}
 </div>
 {% endif %}

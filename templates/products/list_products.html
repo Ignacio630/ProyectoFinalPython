@@ -4,45 +4,44 @@
 
 {% block content %}
 <div class="container ">
-{% if error %}
-<div class="body ">
-    <div class="card m-5">
-        <div class="card-body">
-            <div class="alert text-danger text-center">
-                <h1 class="text-danger mb-5">{{error}}</h1>
-                <a href="{% url 'home_page' %}" class="btn btn-primary">Volver al inicio</a>
+    {% if error %}
+    <div class="body ">
+        <div class="card m-5">
+            <div class="card-body">
+                <div class="alert text-danger text-center">
+                    <h1 class="text-danger mb-5">{{error}}</h1>
+                    <a href="{% url 'home_page' %}" class="btn btn-primary">Volver al inicio</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-{% endif %}
-<div class="body justify-content-end mx-5">
-    <div class="btn btn-light dropdown mt-3 ">
-        <a class="dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Categorias
-        </a>
-        <ul class="dropdown-menu">
-            {% for category in categories %}
-            <li><a class="dropdown-item"
-                href="{% url 'list_products_by_category' category.id %}">{{category.name}}</a>
-            </li>
-            {% endfor %}
-        </ul>
+    {% endif %}
+    <div class="body d-flex justify-content-end">
+        <div class="btn btn-light dropdown mt-3 ">
+            <a class="dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categorias
+            </a>
+            <ul class="dropdown-menu">
+                {% for category in categories %}
+                <li><a class="dropdown-item"
+                        href="{% url 'list_products_by_category' category.id %}">{{category.name}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
-</div>
-<hr class="border border-dark border-2 opacity-50">
+    <hr class="border border-dark border-2 opacity-50">
 
-{% for product in products %}
-{% if product.stock%}
+    {% for product in products %}
+    {% if product.stock%}
 
-{% if user.is_superuser %}
-    <div class="card  m-5">
+    {% if user.is_superuser %}
+    <div class="card m-5">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4">
-                    <img src="{{product.image.url}}" alt="imagen"  width="300px" height="300px" class="rounded-circle ml-5">
+                    <img src="{{product.image.url}}" alt="imagen" class="img-fluid rounded-circle ml-5">
                 </div>
                 <div class="col-md-8">
                     <h1 class="display-4 text-center">{{product.name}}</h1>
@@ -51,6 +50,7 @@
                     <p class="text-center">{% if product.stock %}Con stock{% else %}Sin stock{% endif %}</p>
                     <p class="text-center">{{product.category}}</p>
                     <div class="d-flex justify-content-center">
+                        <a class="btn btn-primary mr-2" href="{% url 'add_product' product.id %}">Añadir al carrito</a>
                         <a class="btn btn-warning mr-2" href="{% url 'update_product' product.id %}">Editar</a>
                         <a class="btn btn-danger" href="{% url 'delete_product' product.id %}">Eliminar</a>
                     </div>
@@ -60,27 +60,28 @@
     </div>
     {% else %}
     <div class="card m-5">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <img src="{{product.image.url}}" alt="imagen" width="300px" height="300px" class="rounded-circle ml-5">
-                    </div>
-                    <div class="col-md-7">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{product.image.url}}" alt="imagen" width="300px" height="300px"
+                        class="rounded-circle ml-5">
+                </div>
+                <div class="col-md-7">
                     <h1 class="display-4 text-center">{{product.name}}</h1>
                     <p class="text-center">{{product.description}}</p>
                     <p class="text-center">{{product.price}}</p>
                     <p class="text-center">{% if product.stock %}Con stock{% else %}Sin stock{% endif %}</p>
                     <p class="text-center">{{product.category}}</p>
                     <div class="d-flex justify-content-center">
-                        <a class="btn btn-primary mr-2" href="{% url 'login_form' %}">Añadir al carrito</a>
+                        <a class="btn btn-primary mr-2" href="{% url 'add_product' product.id %}">Añadir al carrito</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-{% endif %}
-{% endif %}
-{% endfor %}
+    {% endif %}
+    {% endif %}
+    {% endfor %}
 
 </div>
 {% endblock %}

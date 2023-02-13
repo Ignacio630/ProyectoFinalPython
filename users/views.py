@@ -50,7 +50,7 @@ def register_form(request):
             except IntegrityError:
                 context = {
                     'form': UserCreationForm,
-                    'error': 'Username has already been taken. Please choose a new username.'
+                    'error': 'Nombre de usuario ya existe, por favor elija otro'
                 }
                 return render(request, 'users/register.html', context=context)
 
@@ -74,36 +74,43 @@ def user_profile(request):
 @login_required
 def update_user(request):
     user = request.user
-    if request.method == 'POST':
-        formEdit = UserEditForm(request.POST)
-        if formEdit.is_valid():
-            info = formEdit.cleaned_data
-            if info['password1'] == info['password2']:
+    if request.method == 'GET':
+        form = UserEditForm(initial={
+            'username': user.username,
+            'email': user.email,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+        })
+        context = {
+            'form': form
+        }
+        return render(request, 'users/update.html', context=context)
+    else:
+        form = UserEditForm(request.POST)
+        if form.is_valid():
+            try:    
+                info = form.cleaned_data
+                
                 user.username = info['username']
                 user.email = info['email']
                 user.first_name = info['first_name']
                 user.last_name = info['last_name']
                 user.save()
-                return redirect('user_profile')
-            else:
+                return redirect('home_page')    
+            except IntegrityError:
                 context = {
-                    'user': user,
-                    'form': formEdit,
-                    'error': 'Las contraseñas no coinciden'
-                }
+                    'form': form,
+                    'error': 'Nombre de usuario ya existe, por favor elija otro' 
+                    }
                 return render(request, 'users/update.html', context=context)
         else:
             context = {
-                'user': user,
-                'form': formEdit,
+            'form': form,
+            'error': 'Error al actualizar el usuario' 
             }
             return render(request, 'users/update.html', context=context)
-    else:
-        context = {
-            'user': user,
-            'form': UserEditForm,
-        }
-        return render(request, 'users/update.html', context=context)
+    
+
 
 @login_required
 def update_password(request):

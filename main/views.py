@@ -19,3 +19,7 @@ def base(request):
         'products': listProducts,
     }
     return render(request, "base.html", context=context)
+
+
+def about_me(request):
+    return render(request, "layouts/about.html", context={})
