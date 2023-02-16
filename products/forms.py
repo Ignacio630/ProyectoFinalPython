@@ -22,7 +22,7 @@ class UpdateProductsForm(forms.ModelForm):
     descripcion = forms.CharField(max_length=300)
     price = forms.DecimalField(max_digits=10, decimal_places=2)
     stock = forms.BooleanField(required=False)
-    image = forms.ImageField()
+    image = forms.ImageField(required=False, label='Imagen del producto')
     category = forms.ModelChoiceField(queryset=Category.objects.all())
     
     class Meta:

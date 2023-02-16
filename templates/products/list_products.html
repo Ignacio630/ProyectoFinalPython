@@ -4,19 +4,6 @@
 
 {% block content %}
 <div class="container ">
-    {% if error %}
-    <div class="body ">
-        <div class="card m-5">
-            <div class="card-body">
-                <div class="alert text-danger text-center">
-                    <h1 class="text-danger mb-5">{{error}}</h1>
-                    <a href="{% url 'home_page' %}" class="btn btn-primary">Volver al inicio</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {% endif %}
     <div class="body d-flex justify-content-end">
         <div class="btn btn-light dropdown mt-3 ">
             <a class="dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -32,6 +19,19 @@
         </div>
     </div>
     <hr class="border border-dark border-2 opacity-50">
+    {% if error %}
+    <div class="body ">
+        <div class="card m-5">
+            <div class="card-body">
+                <div class="alert text-danger text-center">
+                    <h1 class="text-danger mb-5">{{error}}</h1>
+                    <a href="{% url 'home_page' %}" class="btn btn-primary">Volver al inicio</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% endif %}
 
     {% for product in products %}
     {% if product.stock%}
