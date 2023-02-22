@@ -37,18 +37,11 @@ def detail_product(request, product_id):
             'product': product,
         }
         return render(request, 'products/detail_product.html', context=context)
-
-@login_required(login_url='login_form')
-def delete_product(request, product_id):
-    product = get_object_or_404(Products, pk=product_id)    
-    if request.method == 'POST':
-        product.delete()
-        return redirect('home_page')
     else:
         context = {
-            'product': product,
+            'error': 'Error al mostrar el producto',
         }
-        return render(request, 'products/delete_product.html', context=context)
+        return render(request, 'products/detail_product.html', context=context)
     
 @login_required
 def update_product(request, product_id):
@@ -85,10 +78,16 @@ def update_product(request, product_id):
                 'form_errors': form.errors,
             }
             return render(request, 'products/update_product.html', context=context)
-        
+
 def delete_product(request, product_id):
-    product = get_object_or_404(Products, pk=product_id)    
-    if request.method == 'POST':
+    product = get_object_or_404(Products, pk=product_id)
+    
+    if request.method == 'GET':
+        context = {
+            'product': product,
+        }
+        return render(request, 'products/delete_product.html', context=context)
+    elif request.method == 'POST':
         product.delete()
         return redirect('home_page')
 
