@@ -14,8 +14,7 @@ Eliminar perfil
                 <div class="mb-4">
                     <h4>¿Estas seguro que quieres eliminar el producto?</h4>
                 </div>
-                <input type="submit" value="Eliminar perfil" class="btn btn-danger mb-3"
-                    href="{% url 'delete_product' product.id %}"></input>
+                <button type="submit" class="btn btn-danger">Eliminar</button>
                 <a class="btn btn-primary" href="{% url 'detail_product' product.id %}">Volver</a>
             </form>
         </div>

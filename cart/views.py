@@ -4,6 +4,7 @@ from products.models import Products
 from .models import Cart
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from products.models import Products
 # Create your views here.
 
 def cart_product(request):
@@ -31,7 +32,7 @@ def add_product(request, product_id):
     cart.save()
     return redirect('cart_products')
 
-def delete_product(request, product_id):
+def delete_product_cart(request, product_id):
     if request.method == 'POST':
         product = Products.objects.get(id=product_id)
         cart = Cart.objects.get(product=product, user=request.user)

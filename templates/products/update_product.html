@@ -9,11 +9,11 @@ Product Form
 <main class="container">
     <div class="row">
         <div class="col-md-4 offset-md-4 text-center mt-5">
-            <form method="POST" class="card card-body">
+            <form method="POST" class="card card-body" enctype="multipart/form-data">
                 {% csrf_token %}
                 <h1 class="text-center mb-5">{{product.name}}</h1>
                 <p class="text-danger">{{error}}</p>
-                    {{form.as_p}}
+                {{form.as_p}}
                 <input type="submit" value="Editar" class="btn btn-primary">
             </form>
         </div>
