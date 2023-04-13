@@ -78,7 +78,8 @@ def update_product(request, product_id):
             return render(request, 'products/update_product.html', context=context)
         
 def delete_product(request, product_id):
-    product = get_object_or_404(Products, pk=product_id)    
+    product = get_object_or_404(Products, pk=product_id)
+    print(product)
     if request.method == 'POST':
         product.delete()
         return redirect('home_page')

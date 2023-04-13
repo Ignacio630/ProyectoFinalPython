@@ -18,7 +18,7 @@
                     <p class="text-center">{{product.price}}</p>
                     <p class="text-center">{% if product.stock %}Con stock{% else %}Sin stock{% endif %}</p>
                     <div class="d-flex justify-content-center">
-                        <a class="btn btn-primary mr-2">Añadir al carrito</a>
+                        <a class="btn btn-primary mr-2" href="{% url 'add_product' product.id %}">Añadir al carrito</a>
                         <a class="btn btn-warning mr-2" href="{% url 'update_product' product.id %}">Editar</a>
                         <a class="btn btn-danger" href="{% url 'delete_product' product.id %}">Eliminar</a>
                     </div>
