@@ -70,25 +70,25 @@
         </div>
 
         {% else %}
-        <div class="card m-5">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <img src="{{product.image.url}}" alt="imagen" class="rounded-circle ml-5">
+        <div class="col ">
+            <a href="{% url 'detail_product' product.id %}" class="card-link">
+                <div class="card mb-2 text-center" style=" width: 18rem; ">
+                    <img src="{{product.image.url}}" class="card-img-top p-1"
+                        style="width: 200px; height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text">{{product.description}}</p>
                     </div>
-                    <div class="col-md-7 text-center>
-                        <h1 class=" display-4 text-center">{{product.name}}</h1>
+                    <h1 class = "display-4 text-center">{{product.name}}</h1>
                         <p class="text-center">{{product.description}}</p>
                         <p class="text-center">{{product.price}}</p>
                         <p class="text-center">{% if product.stock %}Con stock{% else %}Sin stock{% endif %}</p>
                         <p class="text-center">{{product.category.name}}</p>
-                        <div class="d-flex justify-content-center">
-                            <a class="btn btn-primary mr-2" href="{% url 'add_product' product.id %}">Añadir al
-                                carrito</a>
-                        </div>
+                    <div class="d-flex justify-content-center">
+                        <a class="btn btn-primary mr-2" href="{% url 'add_product' product.id %}">Añadir al carrito</a>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
         {% endif %}
         {% endif %}

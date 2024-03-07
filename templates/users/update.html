@@ -14,7 +14,7 @@ Editar perfil
                 {% csrf_token %}
                 {{form.as_p}}
                 <a href="{% url 'update_password' %}">Desea cambiar la contraseña?</a>
-                <a class="btn btn-warning my-3" href="{% url '' %}">Editar</a>
+                <button type="submit" class="btn btn-warning my-3">Editar</button>
                 <a class="btn btn-primary" href="{% url 'user_profile' %}">Volver</a>
             </form>
         </div>

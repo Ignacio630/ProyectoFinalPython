@@ -81,23 +81,20 @@ def update_product(request, product_id):
 
 def delete_product(request, product_id):
     product = get_object_or_404(Products, pk=product_id)
-<<<<<<< HEAD
     print(product)
     if request.method == 'POST':
         product.delete()
         return redirect('home_page')
     else:
-=======
     
-    if request.method == 'GET':
->>>>>>> 4fee19c3ba9e6765a25822ec7c5197a82833d401
-        context = {
-            'product': product,
-        }
-        return render(request, 'products/delete_product.html', context=context)
-    elif request.method == 'POST':
-        product.delete()
-        return redirect('home_page')
+        if request.method == 'GET':
+            context = {
+                'product': product,
+            }
+            return render(request, 'products/delete_product.html', context=context)
+        elif request.method == 'POST':
+            product.delete()
+            return redirect('home_page')
 
 def list_products(request):
     if request.method == 'GET':
